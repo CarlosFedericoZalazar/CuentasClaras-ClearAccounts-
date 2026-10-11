@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <main>
+        <header>
+            <h1>
+                REGISTRO
+            </h1>
+        </header>
+        <form>
+            <div id="div-nombre">
+                <div>
+                    <label class="label-inputs" for="nombre">Nombre:</label>
+                    <input class="text-input-name" type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+                </div>
+                 <div>
+                     <label class="label-inputs" for="apellido">Apellido:</label>
+                     <input class="text-input-name" type="text" id="apellido" name="apellido" placeholder="Apellido" required>
+                </div>   
+            </div>
+            <label class="label-inputs" for="email">Correo electrónico:</label>
+            <input class="text-input" type="email" id="email" name="email" placeholder="tu@email.com" required>
+            
+            <label class="label-inputs" for="password">Password:</label>
+            <input class="text-input" type="password" id="password" name="password" placeholder="password" required>
+            <input class="text-input" type="password" id="password" name="password" placeholder="Confirmar password" required>
+            <button id="registerBtn">Registrarse</button>
+
+        </form>
+    </main>
+</body>
+</html>
