@@ -122,14 +122,22 @@ button:hover {
     main {
         padding: 1rem; /* Reducimos el padding interno para ganar espacio */
         border-radius: 10px; /* Bordes un poco menos redondeados en celu */
+        height: 700px;
     }
 
     header h1 {
-        font-size: 2rem; /* Achicamos el título para que no rompa en pantallas muy angostas */
+        font-size: 3.5rem; /* Achicamos el título para que no rompa en pantallas muy angostas */
         margin-bottom: 1rem;
     }
 
+    #div-nombre {
+        flex-direction: column; /* Apilamos los inputs de nombre y apellido */
+        align-items: center; /* Centramos los inputs */
+    }
+
     form {
-        padding: 1rem;
+        padding: 0.5rem;
+        height: 500px;
+        justify-content: space-around; /* Distribuimos los elementos del formulario */
     }
 }
