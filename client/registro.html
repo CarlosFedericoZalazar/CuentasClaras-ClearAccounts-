@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body>
     <main>
@@ -13,7 +14,7 @@
                 REGISTRO
             </h1>
         </header>
-        <form>
+        <form id="registerForm">
             <div id="div-nombre">
                 <div>
                     <label class="label-inputs" for="nombre">Nombre:</label>
@@ -28,11 +29,19 @@
             <input class="text-input" type="email" id="email" name="email" placeholder="tu@email.com" required>
             
             <label class="label-inputs" for="password">Password:</label>
-            <input class="text-input" type="password" id="password" name="password" placeholder="password" required>
-            <input class="text-input" type="password" id="password" name="password" placeholder="Confirmar password" required>
-            <button id="registerBtn">Registrarse</button>
-
+            <div>
+                <input class="text-input" type="password" id="password" name="password" placeholder="password" required>
+                <button class="button-password" type="button" id="togglePassword" aria-label="Mostrar contraseña">👁️</button>
+            </div>
+            <div>
+                <input class="text-input" type="password" id="password-confirm" name="password" placeholder="Confirmar password" required>
+                <button class="button-password" type="button" id="togglePasswordConfirm" aria-label="Mostrar contraseña">👁️</button>
+            </div>
+            
+            <button type="submit" id="registerBtn">Registrarse</button>
         </form>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script type="module" src="./js/registro.js"></script>
 </body>
 </html>

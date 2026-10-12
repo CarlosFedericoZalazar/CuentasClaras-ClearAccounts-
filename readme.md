@@ -2,128 +2,118 @@
 
 > Control de gastos compartidos, claro y simple. *(nombre provisorio)*
 
-![Estado](https://img.shields.io/badge/estado-en%20desarrollo-yellow)
-![Node](https://img.shields.io/badge/node-%3E%3D18-green)
-![Licencia](https://img.shields.io/badge/licencia-MIT-blue)
+Aplicación web fullstack para llevar el control de gastos compartidos entre varias personas (pareja, familia, compañeros de piso): registrar gastos mes a mes, asignar gastos fijos a quien se hace cargo e invitar a otras personas mediante un vínculo.
 
-## 📌 Descripción
+**Estado actual:** Sprint 1 en curso (registro hecho, falta validación de email y login).
 
-CuentasClarasApp es una aplicación web fullstack para llevar el control de gastos compartidos entre varias personas (pareja, familia, compañeros de piso). Permite registrar gastos mes a mes, asignar gastos fijos a quien se hace cargo de ellos e invitar a otras personas mediante un vínculo.
-
-**Problema que resuelve:** *(completar: ¿por qué existe la app? ¿quién la usa?)*
-
-## 📑 Índice
-
-1. [Stack tecnológico](#-stack-tecnológico)
-2. [Requerimientos](#-requerimientos)
-3. [Diseño](#-diseño)
-4. [Arquitectura](#-arquitectura)
-5. [Modelo de datos](#-modelo-de-datos)
-6. [API](#-api)
-7. [Instalación](#-instalación)
-8. [Variables de entorno](#-variables-de-entorno)
-9. [Scripts](#-scripts)
-10. [Roadmap por sprints](#-roadmap-por-sprints)
-11. [Estructura del proyecto](#-estructura-del-proyecto)
-12. [Decisiones técnicas](#-decisiones-técnicas)
-13. [Contribuir](#-contribuir)
-14. [Autor](#-autor)
-
-## 🛠 Stack tecnológico
+## 🛠 Stack
 
 | Capa | Tecnología |
 |------|-----------|
 | Frontend | HTML, CSS, JavaScript |
+| Notificaciones | Toastify-js (por CDN) |
 | Backend | Node.js + Express |
-| Base de datos | Supabase (PostgreSQL) |
-| Autenticación | JWT |
+| Base de datos y autenticación | Supabase (PostgreSQL + Supabase Auth, sesión con JWT) |
 | Emails | Resend |
 | Diseño | Figma |
-| Deploy | *(pendiente: Vercel / Render / ...)* |
 
 ## ✅ Requerimientos
+
+Estados: ✅ hecho · 🟨 en progreso · ⬜ pendiente
 
 ### Funcionales
 
 | ID | Requerimiento | Sprint | Estado |
-|----|---------------|--------|--------|
-| RF-01 | Como usuario quiero registrarme | 1 | ⬜ |
-| RF-02 | Validar el registro mediante token enviado al mail | 1 | ⬜ |
-| RF-03 | Recuperar contraseña olvidada | 2 | ⬜ |
-| RF-04 | Enviar un vínculo para invitar a una persona a mi control de gastos | 3 | ⬜ |
-| RF-05 | Administrar la tabla de participantes (eliminar) | 3 | ⬜ |
-| RF-06 | Registrar gastos mes a mes | 4 | ⬜ |
-| RF-07 | Asentar gastos fijos y asignarlos a la persona responsable | 4 | ⬜ |
-| RF-08 | Registrar el concepto del gasto | 4 | ⬜ |
+|----|---------------|:------:|:------:|
+| RF-01 | Registrarme como usuario | 1 | ✅ |
+| RF-02 | Validar el registro con un token enviado al mail | 1 | 🟨 |
+| RF-03 | Iniciar sesión | 1 | ⬜ |
+| RF-04 | Recuperar contraseña olvidada | 2 | ⬜ |
+| RF-05 | Invitar a una persona a mi control de gastos mediante un vínculo | 3 | ⬜ |
+| RF-06 | Administrar participantes (eliminar) | 3 | ⬜ |
+| RF-07 | Registrar gastos mes a mes con su concepto | 4 | ⬜ |
+| RF-08 | Asentar gastos fijos y asignarlos a la persona responsable | 4 | ⬜ |
 | RF-09 | Un administrador puede eliminar usuarios | 5 | ⬜ |
-
-> Estados: ⬜ pendiente · 🟨 en progreso · ✅ hecho
 
 ### No funcionales
 
 | ID | Requerimiento |
 |----|---------------|
-| RNF-01 | Persistencia de datos en Supabase |
-| RNF-02 | Sesión mediante tokens JWT |
+| RNF-01 | Persistir los datos en Supabase |
+| RNF-02 | Manejar la sesión con JWT |
 | RNF-03 | Cumplir estándares de escalabilidad |
 
-## 🎨 Diseño
+## 🗓 Roadmap por sprints
 
-Prototipos realizados en Figma:
+| Sprint | Objetivo | Estado |
+|:------:|----------|:------:|
+| 0 | Preparación: diseños en Figma, requerimientos, proyecto en Supabase, estructura base | ✅ |
+| 1 | Registro, validación de email y login | 🟨 En curso |
+| 2 | Recuperación de contraseña | ⬜ Próximo |
+| 3 | Invitaciones y participantes | ⬜ Próximo |
+| 4 | Gastos (mensuales y fijos) | ⬜ Próximo |
+| 5 | Administración, escalabilidad y deploy | ⬜ Próximo |
 
-| Inicio de sesión | Registro |
-|------------------|----------|
-| ![Login](docs/img/login.png) | ![Registro](docs/img/registro.png) |
+### Detalle del Sprint 1
 
-🔗 Link a Figma: *(pegar acá)*
-
-## 🏗 Arquitectura
-
-```
-Cliente (HTML/JS)  ──HTTP──►  API Express  ──►  Supabase (PostgreSQL)
-                                  │
-                                  └──►  Resend (emails de validación / recuperación / invitación)
-```
-
-*(Opcional: reemplazar por un diagrama más prolijo.)*
+- [x] Pantallas de inicio de sesión y registro (HTML)
+- [x] Backend Express con rutas
+- [x] Registro: crea el usuario en `auth.users` y en la tabla `usuarios` (sin confirmar email)
+- [x] Validación de contraseñas en el front con mensajes (Toastify)
+- [x] Capa `service` del backend
+- [ ] Validación de email con Resend
+- [ ] Login y manejo del JWT
+- [ ] Middleware para proteger rutas
 
 ## 🗃 Modelo de datos
 
-*(Borrador a refinar en el sprint 1-2)*
+### Tabla actual: `usuarios`
 
-- **usuarios**: id, nombre, apellido, email, password_hash, rol, verificado, created_at
-- **tokens_verificacion**: id, usuario_id, token, tipo (registro / recuperación), expira_en
-- **grupos** (control de gastos): id, nombre, admin_id
-- **participantes**: grupo_id, usuario_id
-- **invitaciones**: id, grupo_id, token, email, expira_en
-- **gastos**: id, grupo_id, concepto, monto, fecha, pagado_por, es_fijo, responsable_id
+El `id` es el mismo de `auth.users` (Supabase Auth guarda la contraseña y la sesión; esta tabla guarda los datos de perfil).
+
+```sql
+create table public.usuarios (
+  id uuid not null primary key,
+  name text,
+  last_name text,
+  email text,
+  is_verified boolean default false,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+```
+
+| Columna | Tipo | Descripción |
+|---------|------|-------------|
+| id | uuid | Igual al id de `auth.users` |
+| name | text | Nombre |
+| last_name | text | Apellido |
+| email | text | Correo electrónico |
+| is_verified | boolean | `false` hasta que valide el email |
+| created_at | timestamptz | Fecha de creación |
+
+### Tablas futuras (pendientes, se definen en su sprint)
+
+- ⬜ Sprint 3: participantes e invitaciones
+- ⬜ Sprint 4: gastos
+- ⬜ Sprint 5: rol de administrador
 
 ## 🔌 API
 
-*(Documentar cada endpoint a medida que se implementa)*
+| Método | Ruta | Descripción | Estado |
+|--------|------|-------------|:------:|
+| POST | `/api/auth/register` | Registro de usuario | ✅ |
+| GET | `/api/auth/verify` | Validar email | ⬜ |
+| POST | `/api/auth/login` | Iniciar sesión | ⬜ |
 
-| Método | Ruta | Descripción | Auth |
-|--------|------|-------------|------|
-| POST | `/api/auth/register` | Registro de usuario | No |
-| GET | `/api/auth/verify/:token` | Validar email | No |
-| POST | `/api/auth/login` | Iniciar sesión | No |
-| POST | `/api/auth/forgot-password` | Solicitar recuperación | No |
-| POST | `/api/auth/reset-password` | Restablecer contraseña | No |
+*(Se agregan más rutas a medida que avanzan los sprints.)*
 
 ## ⚙️ Instalación
 
 ```bash
-# 1. Clonar el repositorio
-git clone https://github.com/<usuario>/cuentasclaras-app.git
+git clone <url-del-repositorio>
 cd cuentasclaras-app
-
-# 2. Instalar dependencias
 npm install
-
-# 3. Configurar variables de entorno
-cp .env.example .env
-
-# 4. Levantar el servidor en desarrollo
+cp .env.example .env   # completar las variables
 npm run dev
 ```
 
@@ -133,83 +123,19 @@ npm run dev
 PORT=3000
 SUPABASE_URL=
 SUPABASE_KEY=
-JWT_SECRET=
-JWT_EXPIRES_IN=1d
 RESEND_API_KEY=
 APP_URL=http://localhost:3000
 ```
 
 > ⚠️ Nunca subas el archivo `.env` al repositorio.
 
-## 📜 Scripts
-
-| Comando | Descripción |
-|---------|-------------|
-| `npm run dev` | Servidor en modo desarrollo |
-| `npm start` | Servidor en producción |
-
-## 🗓 Roadmap por sprints
-
-### Sprint 0 – Preparación
-- [x] Diseños en Figma (inicio y registro)
-- [x] Definición de requerimientos
-- [ ] Repositorio y estructura base
-- [ ] Proyecto en Supabase
-
-### Sprint 1 – Registro y validación
-- [ ] Pantalla de registro (RF-01)
-- [ ] Envío de token por email (RF-02)
-- [ ] Login con JWT
-
-### Sprint 2 – Recuperación de contraseña
-- [ ] RF-03
-
-### Sprint 3 – Invitaciones y participantes
-- [ ] RF-04, RF-05
-
-### Sprint 4 – Gastos
-- [ ] RF-06, RF-07, RF-08
-
-### Sprint 5 – Administración
-- [ ] RF-09
-- [ ] Revisión de escalabilidad y deploy
-
-## 📁 Estructura del proyecto
-
-```
-cuentasclaras-app/
-├── client/
-│   ├── index.html
-│   ├── registro.html
-│   ├── css/
-│   └── js/
-├── server/
-│   ├── src/
-│   │   ├── routes/
-│   │   ├── controllers/
-│   │   ├── middlewares/
-│   │   ├── services/
-│   │   └── config/
-│   └── app.js
-├── docs/
-│   └── img/
-├── .env.example
-├── .gitignore
-├── package.json
-└── README.md
-```
-
 ## 🧠 Decisiones técnicas
 
-*(Registrar acá el porqué de cada decisión importante: por qué JWT, por qué Supabase, cómo se hashean las contraseñas, etc.)*
-
-## 🤝 Contribuir
-
-1. Hacer un fork
-2. Crear una rama: `git checkout -b feature/nueva-funcionalidad`
-3. Commit: `git commit -m "feat: descripción"`
-4. Push y Pull Request
+- **Supabase Auth:** maneja contraseñas y JWT, en lugar de implementarlos a mano.
+- **Tabla `usuarios` aparte de `auth.users`:** guarda nombre y apellido, que Supabase Auth no tiene como columnas propias.
+- **Confirmar contraseña:** se valida solo en el front, no se guarda.
+- **Toastify-js por CDN:** muestra los mensajes de error y éxito en pantalla. Se carga con `<script>` y no con npm porque el front es HTML plano sin bundler, y el navegador no puede resolver paquetes de `node_modules`.
 
 ## 👤 Autor
 
-**Charly** – Desarrollador Fullstack JavaScript
+**Charly**: Desarrollador Fullstack JavaScript

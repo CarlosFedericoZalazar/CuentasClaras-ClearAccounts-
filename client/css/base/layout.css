@@ -84,6 +84,23 @@ button:hover {
     background-color: #1e2439; /* Un poco más oscuro al pasar el mouse */
 }
 
+.button-password {
+    background-color: #babbc1; /* Color de botón oscuro */
+    color: #292727;
+    padding: 0.2rem;
+    border: none;
+    border-radius: 5px; /* Bordes muy redondeados */
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
+    text-transform: uppercase;
+}
+
+.button-password:hover {
+    background-color: #979899; /* Un poco más oscuro al pasar el mouse */
+}
+
+
 .links {
     margin-top: 0.8rem;
     font-size: 0.8rem;
