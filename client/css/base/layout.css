@@ -1,113 +1,93 @@
 body {
-    background-color: #f0f1f3; /* Color de fondo exterior claro */
+    background-color: #f0f1f3;
     display: flex;
-    justify-content: center; /* Centrado horizontal */
-    align-items: center; /* Centrado vertical */
-    min-height: 100vh; /* Ocupa al menos el 100% de la altura de la pantalla */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0; /* Buen hábito resetear márgenes del body */
 }
 
 header h1 {
-    font-size: 3rem; /* Tamaño de fuente relativo (aprox 48px si base es 16px) */
+    font-size: 2.5rem; /* Reducido para que respire mejor */
     font-weight: normal;
-    text-transform: uppercase; /* Todo en mayúsculas */
-    margin-bottom: 1.5rem; /* Separación con la sección de inputs */
-    margin-top: 0; /* Elimina margen superior */
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    margin-top: 0;
 }
 
-main{
-    text-align: center; /* Centrar todo el texto */
-    margin: 0 auto;
-    padding: 2rem; /* Espaciado interno usando unidades relativas */
-    color: #fff; /* Texto blanco para el título */
-    height: 500px;
-    width: 90%; /* Ancho flexible */
-    max-width: 400px; /* Evita que crezca demasiado en pantallas grandes */
+main {
+    text-align: center;
+    margin: 1rem;
+    padding: 2rem;
+    color: #fff;
+    /* QUITAMOS height fijo: dejamos que crezca según lo que tenga adentro */
+    width: 100%;
+    max-width: 400px;
     background-color: #2C3E50;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #ccc;
-
+    box-sizing: border-box; /* Vital para que el padding no rompa el ancho */
 }
 
 #div-nombre {
     display: flex;
-    justify-content: space-between;
+    gap: 0.5rem; /* Usar gap en vez de calcular espacios a mano */
+    width: 100%;
 }
 
-
-form{
+form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 300px;
+    /* QUITAMOS height fijo */
     background-color: #f2f3f5;
+    padding: 1.5rem;
+    border-radius: 10px;
 }
 
-.text-input {
-    margin-bottom: 0.5rem;
-    padding: 0.5rem;
+.text-input, .text-input-name {
+    margin-bottom: 0.8rem;
+    padding: 0.6rem;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
-    width: 70%
-}
-
-.text-input-name {
-    margin-bottom: 0.5rem;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    width: 90%; /* Asegura que los inputs de nombre y apellido ocupen todo el espacio disponible */
+    width: 100%; /* Todos ocupan el 100 de su contenedor por igual */
+    box-sizing: border-box;
 }
 
 .label-inputs {
     margin-bottom: 0.1rem;
     font-size: 1rem;
     color: #333;
+    align-self: flex-start; /* Alinea los labels a la izquierda para que se vea prolijo */
 }
 
 button {
-    background-color: #2e354f; /* Color de botón oscuro */
+    background-color: #2e354f;
     color: #fff;
     padding: 0.8rem;
     border: none;
-    border-radius: 20px; /* Bordes muy redondeados */
+    border-radius: 20px;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
+    transition: background-color 0.3s ease;
     text-transform: uppercase;
+    width: 100%; /* Botón de ancho completo queda muy bien en celular */
 }
 
 button:hover {
-    background-color: #1e2439; /* Un poco más oscuro al pasar el mouse */
+    background-color: #1e2439;
 }
-
-.button-password {
-    background-color: #babbc1; /* Color de botón oscuro */
-    color: #292727;
-    padding: 0.2rem;
-    border: none;
-    border-radius: 5px; /* Bordes muy redondeados */
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Transición suave al pasar el mouse */
-    text-transform: uppercase;
-}
-
-.button-password:hover {
-    background-color: #979899; /* Un poco más oscuro al pasar el mouse */
-}
-
 
 .links {
-    margin-top: 0.8rem;
-    font-size: 0.8rem;
+    margin-top: 1rem;
+    font-size: 0.85rem;
 }
 
 .links a {
-    color: #3a75c1; /* Color azul para enlaces */
+    color: #3a75c1;
     text-decoration: none;
     margin-bottom: 0.5rem;
     display: block;
@@ -117,27 +97,72 @@ button:hover {
     text-decoration: underline;
 }
 
+/* --- Nuevo contenedor para el input y el ojo --- */
+.password-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative; /* Importante para posicionar el ojo si quieres que esté "adentro" */
+    width: 100%; /* Ocupa el 100% como los otros inputs */
+    margin-bottom: 0.8rem; /* El margen que antes tenía el input solo */
+}
+
+/* --- Ajustes específicos para el input DENTRO del wrapper --- */
+.password-wrapper .text-input {
+    width: 100%; /* Sigue ocupando todo el ancho */
+    margin-bottom: 0; /* Quitamos el margen inferior, ya lo tiene el wrapper */
+    padding-right: 3rem; /* Espacio a la derecha para que el texto no se superponga con el ojo */
+}
+
+/* --- CORRECCIÓN de .button-password: El Ojo --- */
+.button-password {
+    background-color: transparent; /* Fondo transparente para integrarlo */
+    color: #292727;
+    border: none;
+    border-radius: 5px;
+    
+    /* Posicionamiento para que parezca estar "adentro" del input */
+    position: absolute;
+    right: 0.5rem; /* Separación del borde derecho del input */
+    top: 50%;
+    transform: translateY(-50%); /* Centrado vertical perfecto */
+    
+    /* Tamaño fijo y cuadrado */
+    width: 2.2rem;
+    height: 2.2rem;
+    
+    /* Resetear estilos heredados de 'button' global */
+    padding: 0;
+    font-size: 1.2rem; /* Tamaño del emoji o icono */
+    cursor: pointer;
+    text-transform: none; /* No queremos mayúsculas aquí */
+    z-index: 10; /* Asegurar que esté sobre el input */
+}
+
+.button-password:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* Un hover suave y sutil */
+}
 
 @media (max-width: 480px) {
     main {
-        padding: 1rem; /* Reducimos el padding interno para ganar espacio */
-        border-radius: 10px; /* Bordes un poco menos redondeados en celu */
-        height: 700px;
+        align-items: start; 
+        width: 95%; 
+        max-width: none;
+        padding: 1.5rem 1rem; 
+        border-radius: 5px;
+        box-shadow: none; 
+        border: none; 
+
+    }
+    
+    body {
+        align-items: flex-start; /* Alinea desde arriba pero controlamos con padding */
     }
 
     header h1 {
-        font-size: 3.5rem; /* Achicamos el título para que no rompa en pantallas muy angostas */
-        margin-bottom: 1rem;
+        font-size: 2rem; /* Más chico para que no se desborde */
     }
 
     #div-nombre {
-        flex-direction: column; /* Apilamos los inputs de nombre y apellido */
-        align-items: center; /* Centramos los inputs */
-    }
-
-    form {
-        padding: 0.5rem;
-        height: 500px;
-        justify-content: space-around; /* Distribuimos los elementos del formulario */
+        flex-direction: column; /* Se apilan nombre y apellido */
     }
 }
