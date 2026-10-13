@@ -24,3 +24,17 @@ export async function registrarUsuarioService({ name, last_name, email, password
 
   return { userId, message: 'Usuario creado exitosamente en el backend' }
 }
+
+
+export const verificarUsuarioService = async (userId) => {
+  // Ejemplo con tu base de datos (ej: Supabase)
+  const { data, error } = await supabaseAdmin
+    .from('usuarios') // o el nombre de tu tabla
+    .update({ is_verified: true }) // o el nombre de tu columna de verificación
+    .eq('id', userId);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+  return data;
+};

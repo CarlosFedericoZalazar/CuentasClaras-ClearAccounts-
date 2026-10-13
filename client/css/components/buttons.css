@@ -1,0 +1,63 @@
+button {
+    background-color: #2e354f;
+    color: #fff;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    width: 100%; /* Botón de ancho completo queda muy bien en celular */
+}
+
+button:hover {
+    background-color: #1e2439;
+}
+
+
+/* --- CORRECCIÓN de .button-password: El Ojo --- */
+.button-password {
+    background-color: transparent; /* Fondo transparente para integrarlo */
+    color: #292727;
+    border: none;
+    border-radius: 5px;
+    
+    /* Posicionamiento para que parezca estar "adentro" del input */
+    position: absolute;
+    right: 0.5rem; /* Separación del borde derecho del input */
+    top: 50%;
+    transform: translateY(-50%); /* Centrado vertical perfecto */
+    
+    /* Tamaño fijo y cuadrado */
+    width: 2.2rem;
+    height: 2.2rem;
+    
+    /* Resetear estilos heredados de 'button' global */
+    padding: 0;
+    font-size: 1.2rem; /* Tamaño del emoji o icono */
+    cursor: pointer;
+    text-transform: none; /* No queremos mayúsculas aquí */
+    z-index: 10; /* Asegurar que esté sobre el input */
+}
+
+.button-password:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* Un hover suave y sutil */
+}
+
+
+/* --- Nuevo contenedor para el input y el ojo --- */
+.password-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative; /* Importante para posicionar el ojo si quieres que esté "adentro" */
+    width: 100%; /* Ocupa el 100% como los otros inputs */
+    margin-bottom: 0.8rem; /* El margen que antes tenía el input solo */
+}
+
+/* --- Ajustes específicos para el input DENTRO del wrapper --- */
+.password-wrapper .text-input {
+    width: 100%; /* Sigue ocupando todo el ancho */
+    margin-bottom: 0; /* Quitamos el margen inferior, ya lo tiene el wrapper */
+    padding-right: 3rem; /* Espacio a la derecha para que el texto no se superponga con el ojo */
+}
