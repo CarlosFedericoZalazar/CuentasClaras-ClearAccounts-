@@ -26,7 +26,7 @@ Estados: ✅ hecho · 🟨 en progreso · ⬜ pendiente
 | ID | Requerimiento | Sprint | Estado |
 |----|---------------|:------:|:------:|
 | RF-01 | Registrarme como usuario | 1 | ✅ |
-| RF-02 | Validar el registro con un token enviado al mail | 1 | 🟨 |
+| RF-02 | Validar el registro con un token enviado al mail | 1 | ✅ |
 | RF-03 | Iniciar sesión | 1 | ⬜ |
 | RF-04 | Recuperar contraseña olvidada | 2 | ⬜ |
 | RF-05 | Invitar a una persona a mi control de gastos mediante un vínculo | 3 | ⬜ |
@@ -61,7 +61,7 @@ Estados: ✅ hecho · 🟨 en progreso · ⬜ pendiente
 - [x] Registro: crea el usuario en `auth.users` y en la tabla `usuarios` (sin confirmar email)
 - [x] Validación de contraseñas en el front con mensajes (Toastify)
 - [x] Capa `service` del backend
-- [ ] Validación de email con Resend
+- [x] Validación de email con Resend
 - [ ] Login y manejo del JWT
 - [ ] Middleware para proteger rutas
 
@@ -102,7 +102,7 @@ create table public.usuarios (
 | Método | Ruta | Descripción | Estado |
 |--------|------|-------------|:------:|
 | POST | `/api/auth/register` | Registro de usuario | ✅ |
-| GET | `/api/auth/verify` | Validar email | ⬜ |
+| GET | `/api/auth/verify` | Validar email | ✅ |
 | POST | `/api/auth/login` | Iniciar sesión | ⬜ |
 
 *(Se agregan más rutas a medida que avanzan los sprints.)*

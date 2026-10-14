@@ -17,7 +17,7 @@ export const generarToken = (nuevoUsuario) => {
 
 export const enviarEmailVerificacion = async (email, token) => {
     const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
-    const urlVerificacion = `http://${baseUrl}/api/auth/verify?token=${token}`;
+    const urlVerificacion = `${baseUrl}/api/auth/verify?token=${token}`;
   try {
     // 4. ¡ENVIAR EL MAIL DE VERDAD!
     await resend.emails.send({

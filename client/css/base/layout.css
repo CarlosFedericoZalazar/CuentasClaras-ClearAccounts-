@@ -45,23 +45,6 @@ main {
 }
 
 
-.links {
-    margin-top: 1rem;
-    font-size: 0.85rem;
-}
-
-.links a {
-    color: #3a75c1;
-    text-decoration: none;
-    margin-bottom: 0.5rem;
-    display: block;
-}
-
-.links a:hover {
-    text-decoration: underline;
-}
-
-
 @media (max-width: 480px) {
     main {
         align-items: start; 
