@@ -21,3 +21,24 @@ export const registrarUsuario = async (usuario) => {
   }
 };
 
+export const loginUser = async (email, password) => {
+  try {
+    const respuestaServidor = await fetch(`${API_BASE_URL}api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await respuestaServidor.json();
+
+    if (!respuestaServidor.ok) {
+      throw new Error(data.message || "Error al iniciar sesión");
+    }
+    console.log(data);
+    localStorage.setItem("token", data.token);
+    return data;
+  } catch (e) {
+    console.error("Error al iniciar sesión:", e);
+    throw e;
+  }
+};

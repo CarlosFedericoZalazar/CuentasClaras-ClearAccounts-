@@ -1,4 +1,4 @@
-import { supabaseAdmin } from '../db/supabase.js'
+import { supabaseAdmin, supabaseAuth } from '../db/supabase.js'
 
 export async function registrarUsuarioService({ name, last_name, email, password }) {
   // Aquí usamos supabaseAdmin para tener superpoderes de backend
@@ -25,16 +25,24 @@ export async function registrarUsuarioService({ name, last_name, email, password
   return { userId, message: 'Usuario creado exitosamente en el backend' }
 }
 
-
 export const verificarUsuarioService = async (userId) => {
-  // Ejemplo con tu base de datos (ej: Supabase)
   const { data, error } = await supabaseAdmin
-    .from('usuarios') // o el nombre de tu tabla
-    .update({ is_verified: true }) // o el nombre de tu columna de verificación
+    .from('usuarios')
+    .update({ is_verified: true })
     .eq('id', userId);
 
-  if (error) {
-    throw new Error(error.message);
-  }
+  if (error) throw new Error(error.message);
+
+  // Marca el email como confirmado también en auth.users
+  const { error: authError } = await supabaseAdmin.auth.admin.updateUserById(userId, {
+    email_confirm: true,
+  });
+  if (authError) throw new Error(authError.message);
+
   return data;
+};
+
+export const loginUserService = async (email, password) => {
+  const { data, error } = await supabaseAuth.auth.signInWithPassword({ email, password });
+  return { data, error };
 };

@@ -1,4 +1,4 @@
-import { registrarUsuarioService, verificarUsuarioService } from "../service/user.service.js";
+import { registrarUsuarioService, verificarUsuarioService, loginUserService } from "../service/user.service.js";
 import { generarToken, enviarEmailVerificacion, verificarToken } from "../tools/resend.mail.js";
 
 export const registerUser = async (req, res) => {
@@ -12,10 +12,10 @@ export const registerUser = async (req, res) => {
     });
     console.log("USUARIO CREADO:", user)
 
-    const token = await generarToken(user); // Generar el token de verificación
+    const token = generarToken(user); // Generar el token de verificación
     await enviarEmailVerificacion(email, token);
 
-    res.status(201).json({ message: "User registered successfully" });
+    res.status(201).json({ message: "User registered successfully desde Controller" });
   } catch (error) {
     res
       .status(500)
@@ -26,12 +26,29 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    // Perform user login logic here (e.g., validate credentials)
-    res.status(200).json({ message: "User logged in successfully" });
+
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email y contraseña son obligatorios" });
+    }
+
+    const { data, error } = await loginUserService(email, password);
+
+    if (error || !data?.session) {
+      console.log("Error de login:", error?.message);
+      return res.status(401).json({ message: "Credenciales inválidas" });
+    }
+
+    res.status(200).json({
+      message: "User logged in successfully",
+      token: data.session.access_token,
+      user: {
+        id: data.user.id,
+        email: data.user.email,
+        name: data.user.user_metadata?.display_name,
+      },
+    });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error logging in user", error: error.message });
+    res.status(500).json({ message: "Error logging in user", error: error.message });
   }
 };
 

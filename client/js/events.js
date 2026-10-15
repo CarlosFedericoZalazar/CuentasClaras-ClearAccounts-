@@ -11,7 +11,6 @@ export function activarMostrarPassword(boton, campo) {
 }
 
 export function activarRegistro(form, DOM) {
-
   
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -35,11 +34,12 @@ export function activarRegistro(form, DOM) {
 
     try {
       const respuestaServidor = await registrarUsuario(usuario);
+      console.log("Mensaje desde Eventos" + respuestaServidor);
       mostrarExito(respuestaServidor.message); 
 
       setTimeout(() => {
           window.location.href = './index.html';
-      }, 2000);
+      }, 10000);
     } catch (error) {
       mostrarError('Error al registrar el usuario. Por favor, intenta nuevamente.');
       console.error('Error al registrar el usuario:', error.message);
